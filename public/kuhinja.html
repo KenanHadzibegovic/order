@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PINIT Order — Kuhinja</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/meni.js"></script>
+<script src="/ikone.js"></script>
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--line:#e5e5ea;--line2:#efeff4;
+--pinit:#1a7a34;--pinit-d:#0f4f21;--soft:#e8f5ec;
+--amber:#ff9500;--amber-s:#fff4e5;--red:#ff3b30;--red-s:#ffeceb;
+--blue:#007aff;--blue-s:#e8f1ff;
+--ink:#1c1c1e;--ink2:#3c3c43;--ink3:#8e8e93;
+--sh:0 1px 3px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05);
+--fn:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--fn);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+button{font-family:inherit;color:inherit;border:none;background:none;cursor:pointer;}
+svg{display:block;}
+.wrap{max-width:1500px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:14px;min-height:100vh;}
+
+/* ── VRH ── */
+.top{background:#fff;border-radius:22px;box-shadow:var(--sh);display:flex;align-items:center;gap:14px;padding:13px 18px;flex-wrap:wrap;}
+.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(160deg,#22a848,#0f4f21);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(26,122,52,.35);}
+.mark svg{width:23px;height:23px;color:#fff;}
+.title{font-size:18px;font-weight:700;letter-spacing:-.03em;}
+.title span{color:var(--pinit);}
+.title small{display:block;font-size:11.5px;font-weight:500;color:var(--ink3);margin-top:1px;}
+.sp{flex:1;}
+.sat{font-size:20px;font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums;}
+.sat small{display:block;font-size:11px;font-weight:500;color:var(--ink3);letter-spacing:0;}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:12px;padding:10px 14px;font-size:13px;font-weight:600;transition:background .15s;}
+.btn svg{width:16px;height:16px;stroke-width:2;}
+.btn.ghost{background:var(--bg);color:var(--ink2);}
+.btn.ghost:hover{background:var(--line);}
+.btn.ghost.on{background:var(--soft);color:var(--pinit-d);}
+.zivo{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--ink3);background:var(--bg);border-radius:20px;padding:7px 12px;}
+.tacka{width:8px;height:8px;border-radius:50%;background:var(--pinit);animation:bl 2s infinite;}
+.tacka.off{background:var(--red);animation:none;}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ── PLOČA ── */
+.ploca{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start;flex:1;}
+@media(max-width:1000px){.ploca{grid-template-columns:1fr;}}
+.kol{background:rgba(255,255,255,.5);border-radius:20px;padding:12px;min-height:180px;}
+.kolh{display:flex;align-items:center;gap:9px;padding:2px 4px 12px;}
+.kolh .pt{width:9px;height:9px;border-radius:50%;}
+.kolh h2{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ink2);}
+.kolh .br{margin-left:auto;font-size:12px;font-weight:700;color:var(--ink3);background:#fff;border-radius:20px;padding:2px 9px;font-variant-numeric:tabular-nums;}
+.k-novo .pt{background:var(--amber);}
+.k-rad .pt{background:var(--pinit);}
+.k-gotovo .pt{background:var(--blue);}
+.prazno{text-align:center;padding:34px 10px;color:var(--ink3);font-size:12.5px;font-weight:500;}
+.prazno svg{width:26px;height:26px;margin:0 auto 8px;color:var(--line);stroke-width:1.4;}
+
+/* ── TIKET ── */
+.tiket{background:#fff;border-radius:16px;box-shadow:var(--sh);margin-bottom:11px;overflow:hidden;border:1.5px solid transparent;animation:ul .3s cubic-bezier(.2,.8,.3,1);}
+@keyframes ul{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.tiket.kasni{border-color:var(--red);}
+.th{display:flex;align-items:center;gap:10px;padding:12px 14px 10px;}
+.th .broj{font-size:17px;font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums;}
+.th .sto{display:flex;align-items:center;gap:5px;background:var(--soft);color:var(--pinit-d);border-radius:8px;padding:3px 8px;font-size:12px;font-weight:700;}
+.th .sto svg{width:12px;height:12px;}
+.th .tajm{margin-left:auto;text-align:right;}
+.th .tajm b{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.04em;}
+.th .tajm small{display:block;font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.4px;}
+.tiket.kasni .th .tajm b{color:var(--red);}
+.traka{height:3px;background:var(--line2);}
+.traka i{display:block;height:100%;background:var(--pinit);transition:width 1s linear;}
+.tiket.kasni .traka i{background:var(--red);}
+.ts{padding:6px 14px 10px;}
+.tr{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line2);}
+.tr:last-child{border-bottom:none;}
+.tr .ik{width:32px;height:32px;border-radius:9px;background:var(--soft);color:var(--pinit);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tr .ik svg{width:19px;height:19px;}
+.tr .kol2{font-size:15px;font-weight:700;min-width:26px;font-variant-numeric:tabular-nums;color:var(--pinit-d);}
+.tr .naz{font-size:14px;font-weight:600;flex:1;}
+.tr .mm{font-size:11px;font-weight:600;color:var(--ink3);font-variant-numeric:tabular-nums;}
+.nap{margin:2px 14px 10px;background:var(--amber-s);border-radius:9px;padding:7px 10px;font-size:12.5px;font-weight:600;color:#8a4b00;display:flex;gap:7px;}
+.nap svg{width:14px;height:14px;flex-shrink:0;margin-top:1px;stroke-width:2;}
+.tf{padding:0 12px 12px;display:flex;gap:8px;}
+.akcija{flex:1;border-radius:11px;padding:11px;font-size:13.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;transition:filter .15s;}
+.akcija svg{width:15px;height:15px;stroke-width:2.4;}
+.akcija:hover{filter:brightness(.94);}
+.akcija.p{background:var(--pinit);color:#fff;}
+.akcija.b{background:var(--blue);color:#fff;}
+.akcija.g{background:var(--bg);color:var(--ink2);}
+.tiket.gotov{opacity:.62;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="mark" id="logo"></div>
+    <div class="title">PINIT <span>Order</span><small>Ekran kuhinje · Restoran Vrelo</small></div>
+    <div class="sp"></div>
+    <div class="zivo"><div class="tacka" id="tacka"></div><span id="veza-t">uživo</span></div>
+    <button class="btn ghost on" id="btn-zvuk"></button>
+    <a class="btn ghost" href="/statistika" id="btn-stat"></a>
+    <div class="sat"><span id="sat">--:--</span><small id="datum">—</small></div>
+  </div>
+
+  <div class="ploca">
+    <div class="kol k-novo">
+      <div class="kolh"><div class="pt"></div><h2>Novo</h2><div class="br" id="br-0">0</div></div>
+      <div id="c-0"></div>
+    </div>
+    <div class="kol k-rad">
+      <div class="kolh"><div class="pt"></div><h2>U pripremi</h2><div class="br" id="br-1">0</div></div>
+      <div id="c-1"></div>
+    </div>
+    <div class="kol k-gotovo">
+      <div class="kolh"><div class="pt"></div><h2>Spremno za nošenje</h2><div class="br" id="br-2">0</div></div>
+      <div id="c-2"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var $ = function (s) { return document.querySelector(s); };
+var narudzbe = [], zvuk = true, vidjeni = {}, prviUpit = true;
+
+$('#logo').innerHTML = IK('kuhar');
+$('#btn-stat').innerHTML = IK('graf') + '<span>Statistika</span>';
+function crtajZvuk() { $('#btn-zvuk').innerHTML = IK('zvono') + '<span>' + (zvuk ? 'Zvuk uključen' : 'Zvuk isključen') + '</span>'; }
+$('#btn-zvuk').onclick = function () { zvuk = !zvuk; $('#btn-zvuk').classList.toggle('on', zvuk); crtajZvuk(); };
+crtajZvuk();
+
+/* ── zvučni signal (bez fajla, Web Audio) ── */
+var AC = null;
+function bip() {
+  if (!zvuk) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    [0, .16].forEach(function (t, i) {
+      var o = AC.createOscillator(), g = AC.createGain();
+      o.type = 'sine'; o.frequency.value = i ? 1046 : 784;
+      g.gain.setValueAtTime(.0001, AC.currentTime + t);
+      g.gain.exponentialRampToValueAtTime(.18, AC.currentTime + t + .02);
+      g.gain.exponentialRampToValueAtTime(.0001, AC.currentTime + t + .14);
+      o.connect(g); g.connect(AC.destination);
+      o.start(AC.currentTime + t); o.stop(AC.currentTime + t + .16);
+    });
+  } catch (e) {}
+}
+
+/* ── sat ── */
+function sat() {
+  var d = new Date();
+  $('#sat').textContent = d.toLocaleTimeString('bs', { hour: '2-digit', minute: '2-digit' });
+  $('#datum').textContent = d.toLocaleDateString('bs', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+setInterval(sat, 1000); sat();
+
+/* ── učitavanje ── */
+function ucitaj() {
+  fetch('/api/narudzbe?od=' + (new Date().setHours(0, 0, 0, 0)))
+    .then(function (r) { return r.json(); })
+    .then(function (l) {
+      veza(true);
+      var novih = l.filter(function (n) { return n.status === 0 && !vidjeni[n.id]; });
+      l.forEach(function (n) { vidjeni[n.id] = 1; });
+      if (novih.length && !prviUpit) bip();
+      prviUpit = false;
+      narudzbe = l; crtaj();
+    })
+    .catch(function () { veza(false); if (!narudzbe.length) demoPodaci(); });
+}
+function veza(ok) {
+  $('#tacka').classList.toggle('off', !ok);
+  $('#veza-t').textContent = ok ? 'uživo' : 'nema veze sa serverom';
+}
+
+/* ── prikaz ── */
+function proteklo(n) { return Math.floor((Date.now() - n.ts) / 1000); }
+function mmss(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+
+function crtaj() {
+  [0, 1, 2].forEach(function (st) {
+    var l = narudzbe.filter(function (n) { return n.status === st; })
+                    .sort(function (a, b) { return a.ts - b.ts; });
+    $('#br-' + st).textContent = l.length;
+    if (!l.length) {
+      $('#c-' + st).innerHTML = '<div class="prazno">' + IK(['zvono', 'kuhar', 'check'][st]) +
+        ['Nema novih narudžbi', 'Ništa nije u pripremi', 'Ništa ne čeka konobara'][st] + '</div>';
+      return;
+    }
+    $('#c-' + st).innerHTML = l.map(tiket).join('');
+  });
+  document.querySelectorAll('[data-akc]').forEach(function (b) {
+    b.onclick = function () { status(b.dataset.id, +b.dataset.akc); };
+  });
+}
+function tiket(n) {
+  var sek = proteklo(n), lim = n.eta * 60, kasni = sek > lim && n.status < 2;
+  var udio = Math.min(100, sek / lim * 100);
+  return '<div class="tiket' + (kasni ? ' kasni' : '') + (n.status === 2 ? ' gotov' : '') + '" data-t="' + n.id + '">' +
+    '<div class="th"><div class="broj">#' + n.broj + '</div>' +
+      '<div class="sto">' + IK('sto') + 'Sto ' + n.sto + '</div>' +
+      '<div class="tajm"><b data-tajm="' + n.id + '">' + mmss(sek) + '</b>' +
+        '<small>' + (n.status === 2 ? 'spremno' : 'od ' + n.eta + ' min') + '</small></div></div>' +
+    '<div class="traka"><i style="width:' + udio + '%"></i></div>' +
+    '<div class="ts">' + n.stavke.map(function (s) {
+      return '<div class="tr"><div class="ik">' + IK(s.ic) + '</div>' +
+             '<div class="kol2">' + s.kol + '×</div><div class="naz">' + s.naziv + '</div>' +
+             '<div class="mm">' + s.prep + ' min</div></div>';
+    }).join('') + '</div>' +
+    (n.napomena ? '<div class="nap">' + IK('zvono') + '<span>' + n.napomena + '</span></div>' : '') +
+    '<div class="tf">' + [
+      '<button class="akcija p" data-akc="1" data-id="' + n.id + '">' + IK('kuhar') + 'Počni pripremu</button>',
+      '<button class="akcija g" data-akc="0" data-id="' + n.id + '">' + IK('nazad') + '</button>' +
+      '<button class="akcija b" data-akc="2" data-id="' + n.id + '">' + IK('check') + 'Spremno</button>',
+      '<button class="akcija g" data-akc="1" data-id="' + n.id + '">' + IK('nazad') + '</button>' +
+      '<button class="akcija p" data-akc="3" data-id="' + n.id + '">' + IK('check') + 'Servirano</button>'
+    ][n.status] + '</div></div>';
+}
+/* samo brojači se osvježavaju svake sekunde — bez ponovnog crtanja */
+setInterval(function () {
+  narudzbe.forEach(function (n) {
+    var e = document.querySelector('[data-tajm="' + n.id + '"]');
+    if (!e || n.status > 1) return;
+    var sek = proteklo(n);
+    e.textContent = mmss(sek);
+    var t = e.closest('.tiket');
+    t.classList.toggle('kasni', sek > n.eta * 60);
+    var i = t.querySelector('.traka i');
+    if (i) i.style.width = Math.min(100, sek / (n.eta * 60) * 100) + '%';
+  });
+}, 1000);
+
+function status(id, s) {
+  var n = narudzbe.find(function (x) { return String(x.id) === String(id); });
+  if (n) { n.status = s; crtaj(); }               /* odmah, bez čekanja servera */
+  fetch('/api/narudzbe/' + id, { method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: s }) }).then(ucitaj).catch(function () {});
+}
+
+/* ── demo tiketi kad server ne radi (samo za pregled) ── */
+function demoPodaci() {
+  var j = function (id, kol) { var m = MENU.find(function (x) { return x.id === id; });
+    return { id: m.id, naziv: m.naziv, ic: m.ic, kat: m.kat, kol: kol, cijena: m.cijena, prep: m.prep }; };
+  narudzbe = [
+    { id: 1, broj: 41, sto: '4', ts: Date.now() - 95000,  eta: 14, status: 0, napomena: 'Bez luka',
+      stavke: [j('cevapi', 2), j('sopska', 1), j('cola', 2)] },
+    { id: 2, broj: 42, sto: '9', ts: Date.now() - 40000,  eta: 9,  status: 0, napomena: '',
+      stavke: [j('pizza', 1), j('pivo', 2)] },
+    { id: 3, broj: 40, sto: '2', ts: Date.now() - 520000, eta: 16, status: 1, napomena: 'Šnicla dobro pečena',
+      stavke: [j('snicla', 1), j('pomfrit', 1), j('juha', 2)] },
+    { id: 4, broj: 39, sto: '7', ts: Date.now() - 300000, eta: 12, status: 1, napomena: '',
+      stavke: [j('pastrmka', 1), j('zelena', 1)] },
+    { id: 5, broj: 38, sto: '1', ts: Date.now() - 700000, eta: 11, status: 2, napomena: '',
+      stavke: [j('grah', 2), j('lepinja', 2), j('kafa', 2)] }
+  ];
+  crtaj();
+}
+
+ucitaj();
+setInterval(ucitaj, 2500);
+</script>
+</body>
+</html>

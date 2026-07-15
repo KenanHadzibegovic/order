@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PINIT Order — Statistika</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="/meni.js"></script>
+<script src="/ikone.js"></script>
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--line:#e5e5ea;--line2:#efeff4;
+--pinit:#1a7a34;--pinit-d:#0f4f21;--soft:#e8f5ec;
+--amber:#ff9500;--red:#ff3b30;--blue:#007aff;
+--ink:#1c1c1e;--ink2:#3c3c43;--ink3:#8e8e93;
+--sh:0 1px 3px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05);
+--fn:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--fn);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;}
+button{font-family:inherit;color:inherit;border:none;background:none;cursor:pointer;}
+a{color:inherit;text-decoration:none;}
+svg{display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:14px;}
+.top{background:#fff;border-radius:22px;box-shadow:var(--sh);display:flex;align-items:center;gap:14px;padding:13px 18px;flex-wrap:wrap;}
+.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(160deg,#22a848,#0f4f21);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(26,122,52,.35);}
+.mark svg{width:23px;height:23px;color:#fff;}
+.title{font-size:18px;font-weight:700;letter-spacing:-.03em;}
+.title span{color:var(--pinit);}
+.title small{display:block;font-size:11.5px;font-weight:500;color:var(--ink3);margin-top:1px;}
+.sp{flex:1;}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:12px;padding:10px 14px;font-size:13px;font-weight:600;background:var(--bg);color:var(--ink2);transition:background .15s;}
+.btn:hover{background:var(--line);}
+.btn svg{width:16px;height:16px;stroke-width:2;}
+.btn.pr{background:var(--pinit);color:#fff;}
+.btn.pr:hover{background:var(--pinit-d);}
+
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr);}}
+.kpi{background:var(--card);border-radius:18px;padding:16px 17px;box-shadow:var(--sh);}
+.kpi-l{font-size:12px;font-weight:600;color:var(--ink3);}
+.kpi-v{font-size:27px;font-weight:700;letter-spacing:-.04em;line-height:1;margin-top:10px;font-variant-numeric:tabular-nums;}
+.kpi-v small{font-size:13px;color:var(--ink3);font-weight:600;letter-spacing:0;}
+.kpi-s{font-size:11.5px;font-weight:600;margin-top:8px;color:var(--ink3);}
+.kpi-s.up{color:var(--pinit);}.kpi-s.down{color:var(--red);}
+
+.grid{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;align-items:start;}
+@media(max-width:900px){.grid{grid-template-columns:1fr;}}
+.panel{background:var(--card);border-radius:20px;box-shadow:var(--sh);padding:16px 18px 18px;}
+.ph{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ph h2{font-size:14.5px;font-weight:700;letter-spacing:-.02em;}
+.ph p{font-size:11.5px;color:var(--ink3);font-weight:500;}
+.ph .desno{margin-left:auto;font-size:11.5px;color:var(--ink3);font-weight:600;}
+
+/* satni graf */
+.graf{display:flex;align-items:flex-end;gap:5px;height:150px;padding-top:6px;}
+.stub{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px;height:100%;}
+.stub i{width:100%;background:var(--soft);border-radius:5px 5px 3px 3px;min-height:3px;transition:height .5s cubic-bezier(.2,.8,.3,1);position:relative;}
+.stub.vrh i{background:var(--pinit);}
+.stub.sad i{background:var(--amber);}
+.stub b{font-size:9.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;height:12px;}
+.stub span{font-size:9.5px;color:var(--ink3);font-weight:600;font-variant-numeric:tabular-nums;}
+
+/* top jela */
+.jelo{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line2);}
+.jelo:last-child{border-bottom:none;}
+.ik{width:36px;height:36px;border-radius:10px;background:var(--soft);color:var(--pinit);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ik svg{width:21px;height:21px;}
+.jelo .t{flex:1;min-width:0;}
+.jelo .n{font-size:13.5px;font-weight:600;}
+.bar{height:5px;background:var(--line2);border-radius:3px;margin-top:5px;overflow:hidden;}
+.bar i{display:block;height:100%;background:var(--pinit);border-radius:3px;transition:width .6s cubic-bezier(.2,.8,.3,1);}
+.jelo .v{text-align:right;flex-shrink:0;}
+.jelo .v b{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;}
+.jelo .v small{display:block;font-size:10.5px;color:var(--ink3);font-weight:600;font-variant-numeric:tabular-nums;}
+
+/* tabela stolova */
+table{width:100%;border-collapse:collapse;}
+th{font-size:10.5px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;text-align:left;padding:0 0 8px;}
+th.d,td.d{text-align:right;}
+td{padding:9px 0;border-top:1px solid var(--line2);font-size:13.5px;font-variant-numeric:tabular-nums;}
+td.n{font-weight:600;}
+.pil{display:inline-flex;align-items:center;gap:5px;background:var(--soft);color:var(--pinit-d);border-radius:7px;padding:2px 8px;font-size:12px;font-weight:700;}
+.pil svg{width:11px;height:11px;}
+.prazno{text-align:center;padding:30px 10px;color:var(--ink3);font-size:12.5px;font-weight:500;}
+.prazno svg{width:26px;height:26px;margin:0 auto 8px;color:var(--line);stroke-width:1.4;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="mark" id="logo"></div>
+    <div class="title">PINIT <span>Order</span><small>Statistika smjene · Restoran Vrelo</small></div>
+    <div class="sp"></div>
+    <span class="btn" id="dan">—</span>
+    <a class="btn" href="/kuhinja" id="b-kuh"></a>
+    <button class="btn" id="b-demo"></button>
+    <button class="btn pr" id="b-osv"></button>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-l">Narudžbi danas</div><div class="kpi-v" id="k-nar">0</div><div class="kpi-s" id="k-nar-s">—</div></div>
+    <div class="kpi"><div class="kpi-l">Promet</div><div class="kpi-v" id="k-pro">0 <small>KM</small></div><div class="kpi-s" id="k-pro-s">—</div></div>
+    <div class="kpi"><div class="kpi-l">Prosječan račun</div><div class="kpi-v" id="k-rac">0 <small>KM</small></div><div class="kpi-s">po narudžbi</div></div>
+    <div class="kpi"><div class="kpi-l">Prosječna priprema</div><div class="kpi-v" id="k-pri">0 <small>min</small></div><div class="kpi-s" id="k-pri-s">—</div></div>
+    <div class="kpi"><div class="kpi-l">U procijenjenom roku</div><div class="kpi-v" id="k-rok">100 <small>%</small></div><div class="kpi-s" id="k-rok-s">—</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><div><h2>Opterećenje po satu</h2><p>Broj narudžbi primljenih u svakom satu</p></div>
+      <div class="desno" id="vrh-sat">—</div></div>
+    <div class="graf" id="graf"></div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="ph"><div><h2>Najtraženija jela</h2><p>Broj poslanih porcija danas</p></div></div>
+      <div id="top"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><div><h2>Po stolovima</h2><p>Gdje se danas najviše naručivalo</p></div></div>
+      <div id="stolovi"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var $ = function (s) { return document.querySelector(s); };
+var kn = function (n) { return n.toFixed(2).replace('.', ','); };
+
+$('#logo').innerHTML = IK('graf');
+$('#b-kuh').innerHTML = IK('kuhar') + '<span>Kuhinja</span>';
+$('#b-demo').innerHTML = IK('plus') + '<span>Napuni primjerima</span>';
+$('#b-osv').innerHTML = IK('osvjezi') + '<span>Osvježi</span>';
+$('#dan').textContent = new Date().toLocaleDateString('bs', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+$('#b-demo').onclick = function () { fetch('/api/demo', { method: 'POST' }).then(ucitaj).catch(function () { ucitaj(DEMO); }); };
+$('#b-osv').onclick = function () { ucitaj(); };
+
+function ucitaj(fiks) {
+  if (fiks) return crtaj(fiks);
+  fetch('/api/statistika').then(function (r) { return r.json(); }).then(crtaj).catch(function () { crtaj(DEMO); });
+}
+
+function crtaj(s) {
+  $('#k-nar').textContent = s.narudzbi;
+  $('#k-nar-s').textContent = s.uRadu + ' u radu · ' + s.gotovih + ' završeno';
+  $('#k-pro').innerHTML = kn(s.promet) + ' <small>KM</small>';
+  $('#k-pro-s').textContent = 'ukupno naplaćeno danas';
+  $('#k-rac').innerHTML = kn(s.prosjecanRacun) + ' <small>KM</small>';
+  $('#k-pri').innerHTML = s.prosjecnaPriprema.toFixed(1).replace('.', ',') + ' <small>min</small>';
+
+  var raz = s.prosjecnaPriprema - s.planiranaPriprema;
+  var e = $('#k-pri-s');
+  e.className = 'kpi-s ' + (s.gotovih === 0 ? '' : (raz <= 0 ? 'up' : 'down'));
+  e.textContent = s.gotovih === 0 ? 'nema završenih narudžbi'
+    : (raz <= 0 ? Math.abs(raz).toFixed(1).replace('.', ',') + ' min brže od procjene'
+                : raz.toFixed(1).replace('.', ',') + ' min sporije od procjene');
+
+  $('#k-rok').innerHTML = s.naVrijeme + ' <small>%</small>';
+  var r = $('#k-rok-s');
+  r.className = 'kpi-s ' + (s.naVrijeme >= 85 ? 'up' : 'down');
+  r.textContent = s.naVrijeme >= 85 ? 'kuhinja drži rok' : 'rok se probija — provjeriti gužvu';
+
+  /* satni graf 9–24h */
+  var od = 9, doo = 23, max = Math.max.apply(null, s.poSatu.slice(od, doo + 1)) || 1;
+  var sad = new Date().getHours(), vrh = s.poSatu.indexOf(Math.max.apply(null, s.poSatu));
+  var h = '';
+  for (var i = od; i <= doo; i++) {
+    var v = s.poSatu[i];
+    h += '<div class="stub' + (v && i === vrh ? ' vrh' : '') + (i === sad ? ' sad' : '') + '">' +
+         '<b>' + (v || '') + '</b><i style="height:' + (v / max * 100) + '%"></i>' +
+         '<span>' + i + '</span></div>';
+  }
+  $('#graf').innerHTML = h;
+  $('#vrh-sat').textContent = s.narudzbi ? 'najgušće u ' + vrh + ':00' : 'nema podataka';
+
+  /* top jela */
+  var maxk = s.top.length ? s.top[0].kol : 1;
+  $('#top').innerHTML = s.top.length ? s.top.map(function (j) {
+    return '<div class="jelo"><div class="ik">' + IK(j.ic) + '</div>' +
+      '<div class="t"><div class="n">' + j.naziv + '</div>' +
+      '<div class="bar"><i style="width:' + (j.kol / maxk * 100) + '%"></i></div></div>' +
+      '<div class="v"><b>' + j.kol + '</b><small>' + kn(j.promet) + ' KM</small></div></div>';
+  }).join('') : '<div class="prazno">' + IK('korpa') + 'Danas još nema poslanih narudžbi</div>';
+
+  /* stolovi */
+  $('#stolovi').innerHTML = s.stolovi.length
+    ? '<table><thead><tr><th>Sto</th><th class="d">Narudžbi</th><th class="d">Promet</th></tr></thead><tbody>' +
+      s.stolovi.map(function (t) {
+        return '<tr><td class="n"><span class="pil">' + IK('sto') + t.sto + '</span></td>' +
+               '<td class="d">' + t.narudzbi + '</td><td class="d n">' + kn(t.promet) + ' KM</td></tr>';
+      }).join('') + '</tbody></table>'
+    : '<div class="prazno">' + IK('sto') + 'Nijedan sto još nije naručio</div>';
+}
+
+/* podaci za pregled kad server ne radi */
+var DEMO = (function () {
+  var poSatu = Array(24).fill(0);
+  [11, 12, 13, 14, 18, 19, 20, 21].forEach(function (h, i) { poSatu[h] = [3, 7, 11, 6, 5, 9, 14, 8][i]; });
+  var izbor = ['cevapi', 'pizza', 'pljeska', 'kafa', 'pomfrit', 'sopska', 'pivo', 'grah'];
+  return {
+    narudzbi: 63, promet: 1184.5, prosjecanRacun: 18.8, prosjecnaPriprema: 13.4, planiranaPriprema: 14.2,
+    naVrijeme: 88, gotovih: 58, uRadu: 5, poSatu: poSatu,
+    top: izbor.map(function (id, i) {
+      var m = MENU.find(function (x) { return x.id === id; });
+      var kol = [34, 21, 18, 17, 15, 12, 11, 9][i];
+      return { id: id, naziv: m.naziv, ic: m.ic, kol: kol, promet: kol * m.cijena };
+    }),
+    stolovi: [4, 7, 2, 9, 1, 11].map(function (n, i) {
+      return { sto: String(n), narudzbi: [9, 8, 7, 6, 5, 4][i], promet: [188.5, 164, 142.5, 121, 96, 74][i] };
+    })
+  };
+})();
+
+ucitaj();
+setInterval(ucitaj, 10000);
+</script>
+</body>
+</html>

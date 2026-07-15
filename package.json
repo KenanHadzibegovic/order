@@ -1,0 +1,8 @@
+{
+  "name": "pinit-order",
+  "version": "1.0.0",
+  "description": "PINIT Order — naručivanje za stolom, ekran kuhinje i statistika smjene",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
